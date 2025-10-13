@@ -1,0 +1,77 @@
+{
+  "name": "@gaddario98/react-native-firebase",
+  "version": "1.0.18",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "react-native": "dist/index.native.mjs",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/rollup-plugin-peer-deps-external": "^2",
+    "rollup": "^4.40.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "@gaddario98/react-auth": "*",
+    "@gaddario98/react-firebase": "*",
+    "@gaddario98/react-native-ui": "*",
+    "@gaddario98/react-state": "*",
+    "@gaddario98/utiles": "*",
+    "@invertase/react-native-apple-authentication": "*",
+    "@react-native-firebase/app": "*",
+    "@react-native-firebase/auth": "*",
+    "@react-native-google-signin/google-signin": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "firebase": "*",
+    "react": "*",
+    "react-apple-signin-auth": "*",
+    "react-i18next": "*",
+    "react-native": "*"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "react-native": "./dist/index.native.mjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./native": {
+      "import": "./dist/native/index.mjs",
+      "types": "./dist/native/index.d.ts"
+    },
+    "./web": {
+      "import": "./dist/web/index.mjs",
+      "types": "./dist/web/index.d.ts"
+    },
+    "./ui": {
+      "import": "./dist/ui/index.mjs",
+      "types": "./dist/ui/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaddario98/react-native-firebase"
+  },
+  "keywords": [
+    "react-native",
+    "firebase",
+    "expo"
+  ],
+  "author": "Giosuè Addario ",
+  "bugs": {
+    "url": "https://github.com/gaddario98/react-native-firebase/issues"
+  },
+  "homepage": "https://github.com/gaddario98/react-native-firebase#readme"
+}
