@@ -3,6 +3,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
+import babel from "@rollup/plugin-babel";
 
 // Centralized list of entry points. Each becomes dist/<name>/index.mjs (except root index)
 // Keep this list in sync with package.json exports.
@@ -17,12 +18,12 @@ const entries = [
 // Extra externals that might not be declared as peer deps but should not be bundled.
 const extraExternal = [
   "react",
-  "react/jsx-runtime", 
+  "react/jsx-runtime",
   "react-native",
   "@react-native-firebase/app",
   "@react-native-firebase/auth",
   "firebase/app",
-  "firebase/auth"
+  "firebase/auth",
 ];
 
 const extensions = [".mjs", ".js", ".json", ".ts", ".tsx"];
@@ -31,7 +32,7 @@ const extensions = [".mjs", ".js", ".json", ".ts", ".tsx"];
 /** @type {import('rollup').RollupOptions[]} */
 const config = entries.flatMap(({ name, input, useNative }) => {
   const configs = [];
-  
+
   // Standard config for web/universal
   configs.push({
     input,
@@ -48,8 +49,8 @@ const config = entries.flatMap(({ name, input, useNative }) => {
     },
     plugins: [
       peerDepsExternal(), // auto-mark peer deps as external
-      nodeResolve({ 
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      nodeResolve({
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
         preferBuiltins: false,
         browser: true,
       }),
@@ -62,6 +63,11 @@ const config = entries.flatMap(({ name, input, useNative }) => {
         noForceEmit: true,
       }),
       json(),
+      babel({
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        plugins: ["babel-plugin-react-compiler"],
+        babelHelpers: "bundled",
+      }),
     ],
     onwarn(warning, warn) {
       // Reduce noise for common benign warnings; forward others.
@@ -87,8 +93,15 @@ const config = entries.flatMap(({ name, input, useNative }) => {
       },
       plugins: [
         peerDepsExternal(),
-        nodeResolve({ 
-          extensions: ['.native.ts', '.native.tsx', '.ts', '.tsx', '.js', '.jsx'],
+        nodeResolve({
+          extensions: [
+            ".native.ts",
+            ".native.tsx",
+            ".ts",
+            ".tsx",
+            ".js",
+            ".jsx",
+          ],
           preferBuiltins: false,
           browser: false,
         }),
@@ -100,6 +113,11 @@ const config = entries.flatMap(({ name, input, useNative }) => {
           noForceEmit: true,
         }),
         json(),
+        babel({
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+          plugins: ["babel-plugin-react-compiler"],
+          babelHelpers: "bundled",
+        }),
       ],
       onwarn(warning, warn) {
         if (warning.code === "THIS_IS_UNDEFINED") return;
