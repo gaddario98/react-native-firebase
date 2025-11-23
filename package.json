@@ -1,6 +1,6 @@
 {
   "name": "@gaddario98/react-native-firebase",
-  "version": "1.0.24",
+  "version": "1.0.26",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@gaddario98/react-auth": "^1.0.16",
     "@gaddario98/react-firebase": "^1.0.18",
-    "@gaddario98/react-native-ui": "^1.0.25",
+    "@gaddario98/react-native-ui": "^1.0.30",
     "@gaddario98/react-state": "^1.0.15",
     "@gaddario98/utiles": "^1.0.15"
   },
